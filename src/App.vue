@@ -1,30 +1,52 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="app">
+    <v-header></v-header>
+    <router-view/>
+    <v-footer></v-footer>
+  </div>
 </template>
 
+<script setup>
+import VHeader from "@/templates/v-header.vue"
+import VFooter from "@/templates/v-footer.vue"
+
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Poppins:ital,wght@0,200;0,300;1,100;1,200&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-nav {
-  padding: 30px;
+body {
+  font-family: 'Comfortaa', cursive;
+  font-size: 16px;
+  font-weight: 500;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.container {
+  width: 1200px;
+  margin: 0 auto;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+.font-title {
+  font-size: 24px;
 }
+
+.font-s-title {
+  font-size: 18px;
+}
+
+.font-sub-title {
+  font-size: 16px;
+}
+
+.form-tiny-text {
+  font-size: 12px;
+}
+
+
 </style>

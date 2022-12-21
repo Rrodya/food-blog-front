@@ -2,6 +2,7 @@
   <button
     class="v-button"
     :class="{ 'v-button_border': isBorder}"
+    @click="clickHandle"
   >
     <slot>
       {{text}}
@@ -21,10 +22,10 @@ const props = defineProps({
   },
 })
 
-const emits = defineEmits(["clickHandle"])
+const emit = defineEmits(["clickHandle"])
 
 function clickHandle() {
-  this.$emit("clickHandle");
+  emit("clickHandle");
 }
 
 </script>

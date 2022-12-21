@@ -1,7 +1,7 @@
 <template>
   <div class="forum-item">
     <div class="forum-item__forum-head">
-      <p class="forum-head__title font-s-title">Жарим, парим, варим. Все для мяса и рыбы</p>
+      <p class="forum-head__title font-s-title">{{item.title}}</p>
       <div class="forum-head__tags">
         <p class="forum-head__tags-item form-tiny-text">Морепродукты</p>
         <p class="forum-head__tags-item form-tiny-text">Гриль</p>
@@ -9,13 +9,24 @@
         <p class="forum-head__tags-item form-tiny-text">Домашняя кухня</p>
       </div>
     </div>
-    <p class="forum-item__desc font-sub-title">Обсудим важные моменты в приготовлении блюд из рыбы и мяса. Как создать праздничные ужин из одной грудки курицы и многое другое. Обсудим важные моменты в приготовлении блюд из рыбы и мяса. Как создать праздничные ужин из одной грудки курицы и многое другое</p>
-    <v-svg class="forum-item__arrow" name="arrow-right"></v-svg>
+    <p class="forum-item__desc font-sub-title">{{item.description}}</p>
+    <v-svg @click="clickItem" class="forum-item__arrow" name="arrow-right"></v-svg>
   </div>
 </template>
 
 <script setup>
 import VSvg from "@/components/v-svg.vue"
+import {defineProps, defineEmits, onMounted} from "vue";
+
+const props = defineProps({
+  item: Object
+})
+
+const emit = defineEmits(['handle'])
+
+function clickItem() {
+  emit("handle", {itemId: props.item._id});
+}
 </script>
 
 <style>

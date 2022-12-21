@@ -17,13 +17,52 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/blog',
-    name: "blob",
+    name: "blog",
     component: () => import ("../views/blog-page.vue")
+  },
+  {
+    path: '/blog/:id',
+    name: 'one-blog',
+    component: () => import ('../views/one-blog-page.vue')
+  },
+  {
+    path: '/recipes-page',
+    name: 'recipes',
+    component: () => import ('../views/recipes-page.vue')
+  },
+  {
+    path: '/recipes-page/:id',
+    name: 'one-recipe',
+    component: () => import("../views/one-recipe.vue")
+  },
+  {
+    path: '/register-page',
+    name: 'register',
+    component: () => import("../views/register-page.vue")
+  },
+  {
+    path: "/login-page",
+    name: "login",
+    component: () => import ("../views/login-page.vue")
+  },
+  {
+    path: "/profile-page",
+    name: "profile",
+    component: () => import ("../views/profile-page.vue"),
+  },
+  {
+    path: "/subscribe-ded-moroz",
+    name: "ded",
+    component: () => import("../views/test.vue")
   }
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
+  scrollBehavior(to, from, savedPosition) {
+    // always scroll to top
+    return { top: 0 }
+  },
   routes
 })
 

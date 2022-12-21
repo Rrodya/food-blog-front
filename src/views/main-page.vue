@@ -20,10 +20,10 @@
         <h2 class="main-page__new-recipes-header sub-header">Новые рецепты</h2>
         <p class="see-more">посмотреть все</p>
       </div>
-      <div class="main-page__new-recipes-content gray-content">
+      <div v-if="recipes" class="main-page__new-recipes-content gray-content">
         <div class="container">
           <div class="new-recipes-content__recipes">
-            <recipe-item v-for="item in 3" :key="item"/>
+            <recipe-item v-for="item in recipes.slice(recipes.length - 3, recipes.length)" :key="item._id" :item="item" @handle="handleItem"></recipe-item>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
       <div class="container">
         <h2 class="main-page__category-header sub-header">Интересные категории</h2>
         <div class="main-page__category-content">
-          <VButton class="main-page__tags" v-for="item in 8" :Key="item" text="Категория" :is-border="true"></VButton>
+          <VButton class="main-page__tags" v-for="item in category" :key="item" :text="item.name" :is-border="true"></VButton>
         </div>
       </div>
     </section>
@@ -41,9 +41,15 @@
         <h2 class="main-page__forum-header sub-header">Интересное для обсуждения</h2>
         <p class="see-more">посмотреть все</p>
       </div>
-      <div class="main-page__forum-content gray-content">
+      <div class="main-page__forum-content gray-content" v-if="forumItems">
         <div class="container">
-          <forum-item class="forum-item" v-for="item in 3" :key="item"></forum-item>
+          <forum-item
+            v-for="item in forumItems.slice(0, 3)"
+            :key="item"
+            class="all-artical__list-item"
+            :item="item"
+            @handle="clickForumItem"
+          ></forum-item>
         </div>
       </div>
     </section>
@@ -85,6 +91,54 @@ import VButton from "@/components/v-button.vue"
 import VSvg from "@/components/v-svg.vue"
 import RecipeItem from "@/components/recipe-item.vue"
 import ForumItem from "@/components/forum-item.vue"
+import {useRouter} from "vue-router";
+import {onMounted, ref} from "vue";
+import axios from "axios";
+import LINK from "@/api/link";
+
+
+const router = useRouter();
+const recipes = ref();
+const category = ref();
+const forumItems = ref();
+
+onMounted(() => {
+  axios.get(LINK + "recipes").then((res) => {
+    if(res.status === 200) {
+      if(res.data) {
+        recipes.value = res.data;
+        console.log(recipes.value);
+      }
+    }
+  });
+
+  axios.get(LINK + "category").then((res) => {
+    if(res.status === 200) {
+      if(res.data) {
+        category.value = res.data;
+        console.log(category.value);
+      }
+    }
+  });
+
+  axios.get(LINK + "forum").then((res) => {
+    if(res.status === 200) {
+      if(res.data) {
+        forumItems.value = res.data;
+        console.log(forumItems.value);
+      }
+    }
+  });
+})
+
+
+const clickForumItem = (item) => {
+  router.push({path: `/blog/${item.itemId}`})
+}
+
+const handleItem = (item) => {
+  router.push({path: `/recipes-page/${item.itemId}`})
+}
 
 </script>
 
@@ -197,4 +251,5 @@ section {
 .soc-btn {
   margin: 20px 15px 20px 0;
 }
+
 </style>

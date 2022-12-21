@@ -22,14 +22,20 @@ import VFooter from "@/templates/v-footer.vue"
 }
 
 body {
-  font-family: 'Comfortaa', cursive;
+  /*font-family: 'Comfortaa', cursive;*/
   font-size: 16px;
   font-weight: 500;
+  background-color: #F8FFFD;
 }
 
 .container {
   width: 1200px;
   margin: 0 auto;
+}
+
+.font-header {
+  font-size: 32px;
+  font-weight: 500;
 }
 
 .font-title {
@@ -42,6 +48,10 @@ body {
 
 .font-sub-title {
   font-size: 16px;
+}
+
+.font-text {
+  font-size: 14px;
 }
 
 .form-tiny-text {

@@ -4,13 +4,13 @@
         <v-svg class="v-header-logo" name="logo"/>
         <ul class="v-header-item__nav-list">
           <li class="v-header-item__nav-list-item"><router-link to="/">Главная</router-link></li>
-          <li class="v-header-item__nav-list-item"><router-link to="blog">Блог</router-link></li>
-          <li class="v-header-item__nav-list-item"><router-link to="">Рецепты</router-link></li>
+          <li class="v-header-item__nav-list-item"><router-link to="/blog">Блог</router-link></li>
+          <li class="v-header-item__nav-list-item"><router-link to="/recipes-page">Рецепты</router-link></li>
           <v-svg class="v-header-item__nav-list-search" name="search"/>
         </ul>
         <div class="v-header-item__auth">
-          <v-button class="v-header-auth" text="Войти"/>
-          <v-button class="v-header-register" text="Регистрация" :isBorder="true"/>
+          <v-button class="v-header-auth" @click="$router.push({path: '/login-page'})" text="Войти"/>
+          <v-button class="v-header-register" @click="$router.push({path: '/register-page'})" text="Регистрация" :isBorder="true"/>
         </div>
     </div>
   </div>
@@ -29,6 +29,7 @@ import VButton from "@/components/v-button.vue";
   justify-content: space-between;
   padding: 20px 0;
   align-items: center;
+  border-bottom: 2px solid #96DC14;
 }
 
 .v-header-logo {
